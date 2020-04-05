@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <link rel="stylesheet" href="productivity.css">
+</head>
+<body>
+
+
+  <table id = "eventTable">
+    <tr>
+      <th>Event</th>
+      <th>Start Time</th>
+      <th>End Time</th>
+    </tr>
+
+  </table>
+  <button id = "addButton">Add</button>
+  <div id="myModal" class="modal">
+
+  <!-- Modal content -->
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <label for="eventInput">Event:</label>
+    <input type="text" id="eventInput" name="eventInput"><br><br>
+    <label for="startInput">Start Time:</label>
+    <input type="text" id="startInput" name="startInput"><br><br>
+    <label for="endInput">End Time:</label>
+    <input type="text" id="endInput" name="endInput"><br><br>
+    <button onclick = "addEvent()">Add</button>
+
+  </div>
+
+</div>
+</body>
+
+<script type="text/javascript" src="productivity.js"></script>
+</html>
