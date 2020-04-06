@@ -15,7 +15,7 @@ window.onclick = function(event){
 
 function displayTime(endTime){
   var countDownDate = new Date(endTime).getTime();
-
+  var  timer = document.createElement("P");
   // Update the count down every 1 second
   var x = setInterval(function() {
 
@@ -32,14 +32,16 @@ function displayTime(endTime){
     var seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
     // Output the result in an element with id="demo"
-    var  timer = document.createElement("P");
+
     timer.innerHTML = days + "d " + hours + "h "
     + minutes + "m " + seconds + "s ";
+    document.body.appendChild(timer);
+
 
     // If the count down is over, write some text
     if (distance < 0) {
       clearInterval(x);
-      document.getElementById("demo").innerHTML = "EXPIRED";
+      timer.innerHTML = "EXPIRED";
     }
   }, 1000);
 
