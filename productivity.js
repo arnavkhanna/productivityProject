@@ -1,6 +1,7 @@
 var modal = document.getElementById("myModal") //modal stuff
 var btn = document.getElementById("addButton")
 var span = document.getElementsByClassName("close")[0];
+var timerCount = 1;
 btn.onclick = function(){
   modal.style.display = "block";
 }
@@ -13,9 +14,9 @@ window.onclick = function(event){
   }
 }
 
-function displayTime(endTime){
+function displayTime(endTime,timerId){
   var countDownDate = new Date(endTime).getTime();
-  var  timer = document.createElement("P");
+
   // Update the count down every 1 second
   var x = setInterval(function() {
 
@@ -32,16 +33,16 @@ function displayTime(endTime){
     var seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
     // Output the result in an element with id="demo"
-
-    timer.innerHTML = days + "d " + hours + "h "
+    var timerOn = document.getElementById(timerId);
+    timerOn.innerHTML = days + "d " + hours + "h "
     + minutes + "m " + seconds + "s ";
-    document.body.appendChild(timer);
+
 
 
     // If the count down is over, write some text
     if (distance < 0) {
       clearInterval(x);
-      timer.innerHTML = "EXPIRED";
+      timerOn.innerHTML = "EXPIRED";
     }
   }, 1000);
 
@@ -67,7 +68,12 @@ function addEvent(){ //adds an event to the table
   modal.style.display = "none";
   sortTable();
   var dt = new Date();
-  setTimeout(function(){displayTime(endTime)},Math.abs(startTime-dt));
+  var  timer = document.createElement("P");
+  document.body.appendChild(timer);
+  var timerId = "timer" + timerCount;
+  timer.setAttribute("id", timerId);
+  setTimeout(function(){displayTime(endTime,timerId)},Math.abs(startTime-dt));
+  timerCount++;
 }
 
 function toTime(time){ //converts HH:MM TT to date type
