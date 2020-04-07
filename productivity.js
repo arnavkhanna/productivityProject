@@ -14,8 +14,13 @@ window.onclick = function(event){
   }
 }
 
-function displayTime(endTime,timerId){
+
+function displayTime(endTime,timerId,eventText,displayLabel,timeLeftLabel,timerGroup){//fills out p elements for time and labels
+  timerGroup.setAttribute("class", "timerGroup");
+  displayLabel.innerHTML = eventText;
+
   var countDownDate = new Date(endTime).getTime();
+  timeLeftLabel.innerHTML = "Time Left";
 
   // Update the count down every 1 second
   var x = setInterval(function() {
@@ -33,10 +38,34 @@ function displayTime(endTime,timerId){
     var seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
     // Output the result in an element with id="demo"
-    var timerOn = document.getElementById(timerId);
-    timerOn.innerHTML = days + "d " + hours + "h "
-    + minutes + "m " + seconds + "s ";
 
+
+
+    var timerOn = document.getElementById(timerId);
+
+
+    var displayHours = hours;
+    var displayMins = minutes;
+    var displaySeconds = seconds;
+    if(hours < 10){
+      displayHours = "0" + hours.toString();
+    }
+    if(minutes < 10){
+      displayMins = "0" + minutes.toString();
+    }
+    if(seconds < 10){
+      displaySeconds = "0" + seconds.toString();
+    }
+
+    if(days>0){
+      timerOn.innerHTML = days + ":" + displayHours + ":" + displayMins + ":" + displaySeconds;
+    } else if(hours > 0){
+        timerOn.innerHTML = displayHours + ":" + displayMins + ":" + displaySeconds;
+    } else if(minutes > 0){
+        timerOn.innerHTML = displayMins + ":" + displaySeconds;
+    } else if(seconds > 0){
+      timerOn.innerHTML = "00:" + displaySeconds;
+    }
 
 
     // If the count down is over, write some text
@@ -47,6 +76,8 @@ function displayTime(endTime,timerId){
   }, 1000);
 
 }
+
+
 
 function addEvent(){ //adds an event to the table
   var eventText = document.getElementById("eventInput").value;
@@ -68,11 +99,20 @@ function addEvent(){ //adds an event to the table
   modal.style.display = "none";
   sortTable();
   var dt = new Date();
-  var  timer = document.createElement("P");
-  document.body.appendChild(timer);
+  var timerGroup = document.createElement("DIV");
+
+
+  var label = document.createElement("H2");
+  var  timer = document.createElement("H1");
+  document.getElementById("timerSide").appendChild(timerGroup);
+  timerGroup.appendChild(label);
+  timerGroup.appendChild(timer);
   var timerId = "timer" + timerCount;
   timer.setAttribute("id", timerId);
-  setTimeout(function(){displayTime(endTime,timerId)},Math.abs(startTime-dt));
+  var timeLeftLabel = document.createElement("H2");
+  timerGroup.appendChild(timeLeftLabel);
+
+  setTimeout(function(){displayTime(endTime,timerId,eventText,label,timeLeftLabel,timerGroup)},Math.abs(startTime-dt));
   timerCount++;
 }
 
