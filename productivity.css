@@ -53,12 +53,10 @@ body {
 
 .calendar{
   left: 0;
-
 }
 
 .timer{
   right: 0;
-
 }
 
 .centered {
@@ -70,7 +68,6 @@ body {
 }
 
 .timerGroup {
-
   border-color: rgb(220,220,220);
   border-style:solid;
   border-width:10px;
@@ -78,4 +75,31 @@ body {
   width: 250px;
   height: 250px;
   text-align: center;
+}
+
+.calGroup{
+  position: relative;
+  height: 100px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.time{
+  position: relative;
+  width: 90%;
+  height: 100%;
+  border-bottom-style: solid;
+  display: inline-block;
+  margin-left: 50px;
+  box-sizing: border-box;
+}
+
+.timeText {
+  display: inline-block;
+  position: absolute;
+  bottom: -9px;
+}
+
+mainCal {
+
 }
