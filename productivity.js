@@ -85,6 +85,15 @@ function addEvent(){ //adds an event to the table
   var startText = document.getElementById("startInput").value;
   var endText = document.getElementById("endInput").value;
   var table = document.getElementById("eventTable");
+
+  var eventBlock = document.createElement("DIV");
+  eventBlock.setAttribute("id",eventText);
+  eventBlock.setAttribute("class","inputtedEvent");
+  makeBlock(eventText,startText,endText);
+  eventBlock.innerHTML = eventText;
+  document.getElementById("mainCal").appendChild(eventBlock);
+
+
   var row = table.insertRow(1);
   var eventForTable = row.insertCell(0);
   var startTable = row.insertCell(1);
@@ -195,10 +204,35 @@ function moveCurrentTimeIndicator(){
   twelveAm.setSeconds(0);
   twelveAm.setMilliseconds(0);
   var differenceInMilliseconds = now - twelveAm;
-  var differenceInHours  = differenceInMilliseconds/3600000;
+  var differenceInHours  = millToHrs(differenceInMilliseconds);
   var placeInPixels  = differenceInHours*100 + 100;
 
   $(function(){
     $("#currentTime").css("top",placeInPixels)
   });
+}
+
+function millToHrs(mills){
+  return mills/3600000;
+}
+
+function makeBlock(name,start,end){
+  var startTime = toTime(start);
+  var endTime = toTime(end);
+  var twelveAm = new Date();
+  twelveAm.setHours(0);
+  twelveAm.setMinutes(0);
+  twelveAm.setSeconds(0);
+  twelveAm.setMilliseconds(0);
+
+  var height = millToHrs(endTime-startTime) * 100;
+  var top = millToHrs(startTime-twelveAm) * 100 + 100;
+
+  $(function(){
+    $("#"+name).css("top",top)
+    $("#"+name).css("height",height)
+  });
+
+
+
 }

@@ -117,10 +117,10 @@ body {
 .inputtedEvent {
   background: blue;
   width: 100%;
-  height: attr(/* time diff between event start and end in hrs * 100 */);
+  height:; /* time diff between event start and end in hrs * 100 */
   opacity: 80%;
   position: absolute;
-  top: attr(/* time diff between event start and 12am in hrs + 1 * 100 */);
-  padding: 20px;
+  top:;/* time diff between event start and 12am in hrs + 1 * 100 */
   color: white;
+
 }
