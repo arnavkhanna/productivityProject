@@ -1,5 +1,5 @@
-var modal = document.getElementById("myModal") //modal stuff
-var btn = document.getElementById("addButton")
+var modal = document.getElementById("myModal"); //modal stuff
+var btn = document.getElementById("addButton");
 var span = document.getElementsByClassName("close")[0];
 var timerCount = 1;
 btn.onclick = function(){
@@ -13,6 +13,7 @@ window.onclick = function(event){
     modal.style.display = "none";
   }
 }
+
 
 
 function displayTime(endTime,timerId,eventText,displayLabel,timeLeftLabel,timerGroup){//fills out p elements for time and labels
@@ -173,4 +174,31 @@ function sortTable(){
   }
 
 
+}
+
+function moveCurrentTimeIndicatorLoop(){
+  moveCurrentTimeIndicator();
+  var now = new Date();
+  var topMin = new Date();
+  topMin.setSeconds(0);
+  topMin.setMilliseconds(0);
+  topMin.setMinutes(topMin.getMinutes()+1);
+  setTimeout(setInterval(moveCurrentTimeIndicator(),60000),topMin-now);
+
+}
+
+function moveCurrentTimeIndicator(){
+  var now = new Date();
+  var twelveAm = new Date();
+  twelveAm.setHours(0);
+  twelveAm.setMinutes(0);
+  twelveAm.setSeconds(0);
+  twelveAm.setMilliseconds(0);
+  var differenceInMilliseconds = now - twelveAm;
+  var differenceInHours  = differenceInMilliseconds/3600000;
+  var placeInPixels  = differenceInHours*100 + 100;
+
+  $(function(){
+    $("#currentTime").css("top",placeInPixels)
+  });
 }
